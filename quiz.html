@@ -7,6 +7,16 @@
 <!--<![endif]-->
 
 <head>
+  
+<!-- JS FILES --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/jquery.fancybox.pack.js"></script> 
+<script src="js/jquery.waypoints.min.js"></script> 
+<script src="js/retina.min.js"></script> 
+<script src="js/modernizr.js"></script> 
+<script src="js/main.js"></script>
+
 <meta charset="utf-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,26 +68,97 @@
 <!-- header section --> 
 <!-- description text section -->
 <section id="inner-description" class="section inner-description">
-  <div class="container">
-    <div class="col-md-10 col-md-offset-1 text-center">
-      <p>I am honest, discreet and always focus on your goals. If you are looking for a strategist and experienced designer, just leave me a message and I'll contact you soon.</p>
-      <!--contact form start-->
-      <div class="col-md-6 col-md-offset-3 conForm">
-        <div id="message"></div>
-        <form method="post" action="php/contact.php" name="cform" id="cform">
-          <input name="name" id="name" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Your name..." >
-          <input name="email" id="email" type="email" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="Email Address..." >
-          <textarea name="comments" id="comments" cols="" rows="" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Project Details..."></textarea>
-          <input type="submit" id="submit" name="send" class="submitBnt" value="Send">
-          <div id="simple-msg"></div>
-        </form>
-      </div>
-      <!--contact form end--> 
+  <div class="col-md-8 col-md-offset-2 container text-center">
+    <div>
+      <p id="introText">
+        Nun da du die verschiedenen Programmier Lehren kennengelernt hast, wird es Zeit dich für eine zu entscheiden.
+        <br />Als Hilfestellung wird dieser simple Fragebogen feststellen, welche Ausbildung am besten zu dir passen würde.
+        <br />Beachte jedoch das ein Fragebogen nie zu 100% korrekt sein wird. Am Ende entscheidest DU, welche Ausbildung am besten zu DIR passt.
+        <br />Kreuze alle Aussagen an, welche zu dir passen.
+      </p>
+
+      <br />
+
+      <div id="messageAppli" style="display:none;">
+          <p>Es scheint so als würde die folgende Ausbildung am besten zu dir passen:</p>
+          <h3>Applikationsentwickler</h3>
+        </div>
+        <div id="messageGameProgrammer" style="display:none;">
+            <p>Es scheint so als würde die folgende Ausbildung am besten zu dir passen:</p>
+            <h3>Games Programmer</h3>
+        </div>
+
+      <script type="text/javascript">
+        $(document).ready(function () {
+          
+          if(window.location.href.indexOf("evaluate") > -1) {
+            var quiz = document.getElementById('jform');
+            quiz.style.display = 'none';
+            var introText = document.getElementById('introText');
+            introText.style.display = 'none';
+
+            var score = 0;
+            if(window.location.href.indexOf("quickEdducation") > -1) score = score - 1; else score = score + 1;
+            if(window.location.href.indexOf("needMoney") > -1) score = score + 1; else score = score - 1;
+            if(window.location.href.indexOf("contactWithPeople") > -1) score = score + 1; else score = score - 1;
+            if(window.location.href.indexOf("needSafety") > -1) score = score + 1; else score = score - 1;
+
+            if(window.location.href.indexOf("vg_interessed") > -1 && score < 0) {
+              var messageAppli = document.getElementById('messageAppli');
+              messageAppli.style.display = 'block'; 
+            } else {
+              var messageGameProgrammer = document.getElementById('messageGameProgrammer');
+              messageGameProgrammer.style.display = 'block'; 
+            }
+          }
+        });
+      </script>
     </div>
   </div>
+  <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 text-center">
+      <div class="conForm">
+        <form method="get" action="quiz.html" name="jform" id="jform">
+          <p>
+            <input name="vg_interessed" id="vg_interessed" type="checkbox" />
+            Ich interessiere mich für Videospiele.
+          </p>
+          <p>
+            <input name="quickEdducation" id="quickEdducation" type="checkbox" />
+            Ich möchte meine Ausbildung so schnell wie möglich hinter mich bringen.
+          </p>
+          <p>
+            <input name="needMoney" id="needMoney" type="checkbox" />
+            Ich möchte während der Ausbildung Geld verdienen.
+          </p>
+          <p>
+            <input name="contactWithPeople" id="contactWithPeople" type="checkbox" />
+            Ich möchte Kundenkontakt.
+          </p>
+          <p>
+            <input name="needSafety" id="needSafety" type="checkbox" />
+            Unsicherheiten vertrage ich nicht.
+          </p>
+          <br/><input type="submit" id="submit" name="evaluate" class="submitBnt" value="Auswerten"/>
+        </form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+  </div>
+  
+
 </section>
-<!-- description text section --> 
-<!-- footer -->
+
+<section id="hireme" class="section hireme">
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <h3>Benötigst du noch weitere Links?</h3>
+        <a href="links.html" class="btn btn-large">Links</a> 
+      </div>
+    </div>
+ </section>
+
 <footer class="section footer">
   <div class="footer-bottom">
     <div class="container">
@@ -103,13 +184,5 @@
 </footer>
 <!-- footer --> 
 
-<!-- JS FILES --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.fancybox.pack.js"></script> 
-<script src="js/jquery.waypoints.min.js"></script> 
-<script src="js/retina.min.js"></script> 
-<script src="js/modernizr.js"></script> 
-<script src="js/main.js"></script>
 </body>
 </html>
